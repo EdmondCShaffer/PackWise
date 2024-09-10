@@ -1,0 +1,42 @@
+.packaging-container {
+  width: 75%;
+  margin: 5px auto;
+  padding: 20px;
+  background-color: #fff;
+
+  border-radius: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pack-button {
+  background-color: #45689c;
+  color: #fff;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+.pack-button:hover {
+  background-color: #30486d;
+}
+
+.pack-button:disabled {
+  background-color: #d6d6d6;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+}
+
+.pack-button:disabled:hover {
+  background-color: #d6d6d6;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}

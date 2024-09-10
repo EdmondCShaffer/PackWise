@@ -1,0 +1,104 @@
+.card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2px; /* Adjust gap between cards as needed */
+  justify-content: space-around; /* Ensures cards are spaced evenly */
+  width: 75%; /* Cards container takes up 75% of the screen width */
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Default styling for cards (3 cards per row) */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  box-sizing: border-box;
+  flex: 1 1 calc(33.333% - 20px); /* Ensures cards are of equal size (3 per row) */
+  width: fit-content;
+  height: 700px;
+  overflow-y: scroll;
+}
+.card-packing-title {
+  color: #9c7945;
+  text-decoration-line: underline;
+}
+.left-over-title {
+  color: red;
+}
+.left-over-items {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.packing-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+/* Styles for accordion */
+.accordion-container {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.item {
+  border-bottom: 1px solid #ddd;
+}
+
+.title-button {
+  background-color: #f8f8f8;
+  border: none;
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.content {
+  padding: 10px;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+p {
+  margin: 7px;
+}
+
+.percentage-low {
+  color: red;
+}
+
+.percentage-medium {
+  color: rgb(255, 153, 0);
+}
+
+.percentage-high {
+  color: green;
+}
+
+/* Media query for 2 cards per row */
+@media (max-width: 100%) {
+  .card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+    max-width: calc(50% - 20px); /* Ensure cards don't exceed this width */
+  }
+}
+
+/* Media query for 1 card per row */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%; /* 1 card per row */
+    max-width: 100%; /* Ensure cards don't exceed this width */
+  }
+}

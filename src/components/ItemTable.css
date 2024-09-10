@@ -1,0 +1,73 @@
+/* ItemTable.css */
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+  padding: 0 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-head {
+  background-color: #f9f9f9;
+}
+
+.table-title {
+  color: #9c7945;
+  align-items: center;
+}
+
+.table-header {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+  color: #333;
+}
+
+.even-row {
+  background-color: #f9f9f9;
+}
+
+.odd-row {
+  background-color: #fff;
+}
+
+.table-cell {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.remove-button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+  background-color: #d32f2f;
+}

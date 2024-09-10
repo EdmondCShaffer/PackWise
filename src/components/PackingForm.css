@@ -1,0 +1,45 @@
+/* PackingForm.css */
+.packaging-container {
+  width: 75%;
+  margin: 5px auto;
+  padding: 20px;
+  background-color: #fff;
+
+  border-radius: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pack-button {
+  background-color: #45689c;
+  color: #fff;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+.pack-button:hover {
+  background-color: #30486d;
+}
+
+/* Disabled button styles */
+.pack-button:disabled {
+  background-color: #d6d6d6; /* Light grey background color */
+  color: #a0a0a0; /* Grey text color */
+  cursor: not-allowed; /* Not allowed cursor */
+  border: 1px solid #ccc; /* Light border */
+}
+
+/* Remove hover effect for disabled button */
+.pack-button:disabled:hover {
+  background-color: #d6d6d6; /* Same color as the disabled state to keep consistency */
+  color: #a0a0a0; /* Same color as the disabled state */
+  cursor: not-allowed; /* Same cursor as the disabled state */
+}

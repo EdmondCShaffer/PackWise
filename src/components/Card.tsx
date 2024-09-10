@@ -1,17 +1,59 @@
 import React, { useState } from 'react';
 import './Card.css'; // Import the CSS file
 
-const Card = ({ data }) => {
-  const centsToUSD = (cents) => (cents / 100).toFixed(2);
+interface Item {
+  name?: string;
+  refId?: string;
+  quantity?: number;
+  message?: string;
+}
 
-  const [activeIndex, setActiveIndex] = useState(null);
+interface Box {
+  name: string;
+  price: number;
+  dimensions: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  weightMax: number;
+  weightUsed: number;
+  weightUtilization: number;
+  items: Item[];
+}
 
-  const handleToggle = (index) => {
+interface Data {
+  provider: string;
+  totalCost: number;
+  lenBoxes: number;
+  totalVolume: number;
+  totalWeight: number;
+  boxTypeChoiceGoalUsed: string;
+  boxes: {
+    box: Box;
+  }[];
+  leftovers: {
+    item: Item;
+  }[];
+}
+
+interface CardProps {
+  data: Data;
+}
+
+const Card: React.FC<CardProps> = ({ data }) => {
+  const centsToUSD = (cents: number): string => (cents / 100).toFixed(2);
+
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const groupLeftovers = (leftovers) => {
-    return leftovers.reduce((acc, leftover) => {
+  const groupLeftovers = (leftovers: { item: Item }[]) => {
+    return leftovers.reduce<{
+      [key: string]: { quantity: number; reason?: string };
+    }>((acc, leftover) => {
       const itemName = leftover.item.name || `Item ${leftover.item.refId}`;
       if (!acc[itemName]) {
         acc[itemName] = {
@@ -24,13 +66,13 @@ const Card = ({ data }) => {
     }, {});
   };
 
-  const groupItems = (items) => {
-    return items.reduce((acc, itemData) => {
-      const itemName = itemData.item.name;
+  const groupItems = (items: Item[]) => {
+    return items.reduce<{ [key: string]: number }>((acc, itemData) => {
+      const itemName = itemData.name || `Item ${itemData.refId}`;
       if (!acc[itemName]) {
         acc[itemName] = 0;
       }
-      acc[itemName] += itemData.item.quantity || 1;
+      acc[itemName] += itemData.quantity || 1;
       return acc;
     }, {});
   };
@@ -46,7 +88,7 @@ const Card = ({ data }) => {
   const hasLeftovers = data.leftovers && data.leftovers.length > 0;
   const noBoxesUsed = data.boxes.length === 0;
 
-  const getPercentageClass = (utilization) => {
+  const getPercentageClass = (utilization: number): string => {
     if (utilization < 0.5) return 'percentage-low';
     if (utilization < 0.75) return 'percentage-medium';
     return 'percentage-high';

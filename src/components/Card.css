@@ -1,23 +1,22 @@
 .card-container {
   display: flex;
   flex-direction: row;
-  gap: 2px; /* Adjust gap between cards as needed */
-  justify-content: space-around; /* Ensures cards are spaced evenly */
-  width: 75%; /* Cards container takes up 75% of the screen width */
+  gap: 2px;
+  justify-content: space-around;
+  width: 75%;
   margin: 0 auto;
   padding: 10px;
   box-sizing: border-box;
   background-color: #fff;
 }
 
-/* Default styling for cards (3 cards per row) */
 .card {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 20px;
   margin: 10px;
   box-sizing: border-box;
-  flex: 1 1 calc(33.333% - 20px); /* Ensures cards are of equal size (3 per row) */
+  flex: 1 1 calc(33.333% - 20px);
   width: fit-content;
   height: 700px;
   overflow-y: scroll;
@@ -41,7 +40,6 @@
   align-items: start;
 }
 
-/* Styles for accordion */
 .accordion-container {
   border: 1px solid #ddd;
   border-radius: 5px;

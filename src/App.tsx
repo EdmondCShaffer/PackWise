@@ -125,7 +125,7 @@ const App: React.FC = () => {
 
   return (
     <div className="container">
-      {loading && <Spinner />} {/* Show spinner when loading */}
+      {loading && <Spinner />}
       <HeroSection
         logoSrc={Logo}
         missionStatement="Our mission is to revolutionize the packing process by providing businesses and individuals with an intuitive, efficient, and cost-effective solution. We aim to simplify packing decisions, optimize box utilization, and reduce costs while delivering a seamless user experience."

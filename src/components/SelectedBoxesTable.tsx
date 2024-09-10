@@ -1,5 +1,5 @@
 import React from 'react';
-import './SelectedBoxesTable.css'; // Import the CSS file
+import './SelectedBoxesTable.css';
 
 interface Box {
   name: string;

@@ -1,9 +1,7 @@
-/* Styles for root container */
-
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Make sure root container takes at least the full viewport height */
+  min-height: 100vh;
 }
 
 .container {
@@ -18,17 +16,3 @@
   margin-top: 20px;
   width: 100%;
 }
-
-/* .pack-button {
-  background-color: #45689c;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.pack-button:hover {
-  background-color: #30486d;
-} */

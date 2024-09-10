@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BoxType, RATETABLE } from '../types/boxTypes';
-import './CustomBoxForm.css'; // Import the custom styles
+import './CustomBoxForm.css';
 
 interface CustomBoxFormProps {
   onAddBox: (box: BoxType) => void;
-  existingBoxNames: string[]; // Pass existing box names as a prop
+  existingBoxNames: string[];
 }
 
 const CustomBoxForm: React.FC<CustomBoxFormProps> = ({

@@ -1,4 +1,3 @@
-/* Container for the overall layout */
 .box-selection-container {
   display: flex;
   flex-direction: column;
@@ -7,7 +6,7 @@
   padding: 20px;
   border-radius: 8px;
   background-color: #fff;
-  justify-content: center; /* Align groups evenly in the center */
+  justify-content: center;
   text-align: center;
 }
 .selection-group-container {
@@ -18,7 +17,6 @@
   width: 100%;
 }
 
-/* Title styling */
 .title {
   margin-bottom: 20px;
   font-size: 30px;
@@ -33,10 +31,9 @@
   width: 50%;
   height: 2px;
   background-color: #9c7945;
-  margin: 10px auto 0 auto; /* Center the underline */
+  margin: 10px auto 0 auto;
 }
 
-/* sub-title styling */
 .sub-title {
   margin-bottom: 10px;
   font-size: 18px;
@@ -45,24 +42,21 @@
   text-align: start;
 }
 
-/* Container for both radio and checkbox groups in a row */
 .selectionGroup {
   display: flex;
-  flex-direction: row; /* Display groups in a row */
-  justify-content: space-evenly; /* Evenly space between the groups */
+  flex-direction: row;
+  justify-content: space-evenly;
   margin-top: 20px;
   width: 100%;
 }
 
-/* Radio group styling - Vertical stack */
 .radio-group {
   display: flex;
-  flex-direction: column; /* Stack radio buttons vertically */
+  flex-direction: column;
   margin-bottom: 20px;
-  align-items: flex-start; /* Align items to the start of each group */
+  align-items: flex-start;
 }
 
-/* Styling for each radio button and label */
 .radio-label {
   display: flex;
   align-items: center;
@@ -75,12 +69,11 @@
   margin-right: 10px;
 }
 
-/* Checkbox group styling - Vertical stack */
 .checkbox-group {
   display: flex;
-  flex-direction: column; /* Stack checkboxes vertically */
+  flex-direction: column;
   margin-bottom: 20px;
-  align-items: flex-start; /* Align items to the start of each group */
+  align-items: flex-start;
 }
 
 .checkbox-container {

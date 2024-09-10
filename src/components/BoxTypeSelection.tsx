@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { predefinedBoxTypes, BoxType } from '../types/boxTypes';
-import CustomBoxForm from './CustomBoxForm'; // Import the custom box form component
+import CustomBoxForm from './CustomBoxForm';
 import './BoxTypeSelection.css';
 
 interface BoxTypeSelectionProps {

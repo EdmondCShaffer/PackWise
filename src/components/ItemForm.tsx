@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ItemForm.css'; // Import the CSS file
+import './ItemForm.css';
 
 interface Item {
   product: string;
@@ -14,7 +14,7 @@ interface ItemFormProps {
   item: Item;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddOrUpdate: () => void;
-  heading: string; // Used to determine form mode
+  heading: string;
 }
 
 const ItemForm: React.FC<ItemFormProps> = ({

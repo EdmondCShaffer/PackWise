@@ -128,7 +128,7 @@ const App: React.FC = () => {
       {loading && <Spinner />} {/* Show spinner when loading */}
       <HeroSection
         logoSrc={Logo}
-        missionStatement="Our mission is to empower businesses and individuals by providing a cutting-edge, intuitive platform that streamlines the packing process..."
+        missionStatement="Our mission is to revolutionize the packing process by providing businesses and individuals with an intuitive, efficient, and cost-effective solution. We aim to simplify packing decisions, optimize box utilization, and reduce costs while delivering a seamless user experience."
       />
       <div className="packing-form-section">
         <BoxSelection

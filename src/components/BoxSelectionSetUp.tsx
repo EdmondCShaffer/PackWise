@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import './BoxSelection.css'; // Import the CSS file
+import './BoxSelectionSetUp.css'; // Import the CSS file
 
 interface provider {
   id: string;

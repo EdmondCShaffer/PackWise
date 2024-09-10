@@ -13,8 +13,10 @@
 
 .mission-statement {
   font-size: 18px;
+  width: 800px;
   margin: 20px 0;
-  color: #333;
+  color: #b1b1b1;
+  text-wrap: wrap;
 }
 
 .button {

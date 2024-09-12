@@ -35,6 +35,7 @@ interface Data {
   leftovers: {
     item: Item;
   }[];
+  carrier: string;
 }
 
 interface CardProps {
@@ -79,9 +80,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
   const shippingGoal =
     data.boxTypeChoiceGoalUsed === 'lowest-cost' ? 'Low Cost' : 'Minimum Boxes';
-
-  const provider =
-    data.provider.charAt(0).toUpperCase() + data.provider.slice(1);
 
   const groupedLeftovers = groupLeftovers(data.leftovers || []);
 
@@ -128,8 +126,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
             <strong>Goal:</strong> {shippingGoal}
           </p>
           <p>
-            <strong>Box Provider: </strong>
-            {provider} boxes
+            <strong>Shipping with: </strong>
+            {data.carrier.charAt(0).toUpperCase() + data.carrier.slice(1)}
           </p>
           <p>
             <strong>Total Cost:</strong> ${centsToUSD(data.totalCost)}

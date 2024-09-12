@@ -4,7 +4,7 @@ import { createRequestBody } from './utils/apiUtils';
 
 import HeroSection from './components/HeroSection';
 import Logo from './assets/packwise-high-resolution-logo-transparent.png';
-import BoxSelection from './components/BoxSelectionSetUp';
+import BoxSelectionSetUp from './components/BoxSelectionSetUp';
 import Card from './components/Card';
 import PackingForm from './components/PackingForm';
 import Modal from './components/Modal';
@@ -13,12 +13,14 @@ import SelectedBoxesTable from './components/SelectedBoxesTable';
 import Spinner from './components/Spinner';
 import { BoxType } from './types/boxTypes';
 import { Item } from './types/item';
+import { UPSRATETABLE, FEDEXRATETABLE, USPSRATETABLE } from './types/boxTypes';
 import './App.css';
 
 const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [packingData, setPackingData] = useState<any[]>([]);
   const [boxProvider, setBoxProvider] = useState<string[]>([]);
+  const [selectedCarriers, setSelectedCarrier] = useState<string[]>([]);
   const [comparisonMode, setComparisonMode] = useState<boolean>(false);
   const [selectedBoxTypes, setSelectedBoxTypes] = useState<BoxType[]>([]);
   const [showBoxTypeModal, setShowBoxTypeModal] = useState<boolean>(false);
@@ -27,24 +29,20 @@ const App: React.FC = () => {
   const [packagingGoal, setPackagingGoal] = useState<string>('lowest-cost');
   const [previousPackingInfo, setPreviousPackingInfo] = useState<{
     items: Item[];
-    boxProvider: string[];
+    selectedCarriers: string[];
     selectedBoxTypes: BoxType[];
     comparisonMode: boolean;
     packagingGoal: string;
   }>({
     items: [],
-    boxProvider: [],
+    selectedCarriers: [],
     selectedBoxTypes: [],
     comparisonMode: false,
     packagingGoal: 'lowest-cost',
   });
 
   const handleCarrierChange = (carriers: string[]) => {
-    if (boxProvider.includes('custom') && !carriers.includes('custom')) {
-      setSelectedBoxTypes([]);
-      setShowBoxTypeModal(false);
-    }
-    setBoxProvider(carriers);
+    setSelectedCarrier(carriers);
   };
 
   const handlePackingType = (goal: string) => setPackagingGoal(goal);
@@ -52,7 +50,10 @@ const App: React.FC = () => {
   const handleComparisonModeChange = (enabled: boolean) =>
     setComparisonMode(enabled);
 
-  const handleOtherCarrierSelected = () => setShowBoxTypeModal(true);
+  const handleSelectBoxes = () => {
+    setShowBoxTypeModal(true);
+    console.log('clicked');
+  };
 
   const handleBoxTypeSelect = (boxTypes: BoxType[]) =>
     setSelectedBoxTypes(boxTypes);
@@ -60,38 +61,55 @@ const App: React.FC = () => {
   const handleItemsChange = (updatedItems: Item[]) => setItems(updatedItems);
 
   const handleSubmit = async () => {
-    if (comparisonMode && boxProvider.length === 0) {
-      alert('Please select at least one provider for comparison.');
+    if (comparisonMode && selectedCarriers.length === 0) {
+      alert('Please select at least one carrier for comparison.');
       return;
     }
 
-    if (boxProvider.includes('custom') && selectedBoxTypes.length === 0) {
+    if (selectedBoxTypes.length === 0) {
       alert('Please select at least one box type.');
       return;
     }
 
     setLoading(true);
 
+    const getRateTable = (carrier: string) => {
+      switch (carrier) {
+        case 'fedex':
+          return FEDEXRATETABLE;
+        case 'usps':
+          return USPSRATETABLE;
+        case 'ups':
+          return UPSRATETABLE;
+        default:
+          return FEDEXRATETABLE;
+      }
+    };
+
     try {
-      const requests = boxProvider.map((provider) => {
-        const isOther = provider === 'custom';
+      const requests = selectedCarriers.map((carrier) => {
+        const rateTable = getRateTable(carrier);
+
         const requestBody = createRequestBody(
           items,
-          provider,
-          isOther ? selectedBoxTypes : [],
+          rateTable,
+          selectedBoxTypes,
           packagingGoal
         );
+
         return sendPackingRequest(requestBody).then((response) => ({
           ...response,
-          provider,
+          carrier,
         }));
       });
 
       const responses = await Promise.all(requests);
+
       setPackingData(responses);
+
       setPreviousPackingInfo({
         items,
-        boxProvider,
+        selectedCarriers,
         selectedBoxTypes,
         comparisonMode,
         packagingGoal,
@@ -102,11 +120,12 @@ const App: React.FC = () => {
       setLoading(false);
     }
   };
+
   const isPackingInfoSame = useMemo(() => {
     return (
       JSON.stringify(items) === JSON.stringify(previousPackingInfo.items) &&
-      JSON.stringify(boxProvider) ===
-        JSON.stringify(previousPackingInfo.boxProvider) &&
+      JSON.stringify(selectedCarriers) ===
+        JSON.stringify(previousPackingInfo.selectedCarriers) &&
       JSON.stringify(selectedBoxTypes) ===
         JSON.stringify(previousPackingInfo.selectedBoxTypes) &&
       comparisonMode === previousPackingInfo.comparisonMode &&
@@ -129,16 +148,17 @@ const App: React.FC = () => {
       <HeroSection
         logoSrc={Logo}
         missionStatement="Our mission is to revolutionize the packing process by providing businesses and individuals with an intuitive, efficient, and cost-effective solution. We aim to simplify packing decisions, optimize box utilization, and reduce costs while delivering a seamless user experience."
+        onGetStarted={handleSelectBoxes}
       />
       <div className="packing-form-section">
-        <BoxSelection
-          boxProvider={boxProvider}
+        <BoxSelectionSetUp
+          selectedCarriers={selectedCarriers}
           comparisonMode={comparisonMode}
           packagingGoal={packagingGoal}
-          onBoxProviderChange={handleCarrierChange}
+          onCarrierChange={handleCarrierChange}
           onComparisonModeChange={handleComparisonModeChange}
-          onCustomProviderSelected={handleOtherCarrierSelected}
           onPackingStyleChange={handlePackingType}
+          onSelectBoxes={handleSelectBoxes}
         />
         {selectedBoxTypes.length > 0 && (
           <SelectedBoxesTable
@@ -153,18 +173,18 @@ const App: React.FC = () => {
           isButtonDisabled={isButtonDisabled}
         />
       </div>
-      {boxProvider.includes('custom') && (
-        <Modal
-          isOpen={showBoxTypeModal}
+
+      <Modal
+        isOpen={showBoxTypeModal}
+        onClose={() => setShowBoxTypeModal(false)}
+      >
+        <BoxTypeSelection
+          selectedBoxTypes={selectedBoxTypes}
+          onBoxTypeSelect={handleBoxTypeSelect}
           onClose={() => setShowBoxTypeModal(false)}
-        >
-          <BoxTypeSelection
-            selectedBoxTypes={selectedBoxTypes}
-            onBoxTypeSelect={handleBoxTypeSelect}
-            onClose={() => setShowBoxTypeModal(false)}
-          />
-        </Modal>
-      )}
+        />
+      </Modal>
+
       {packingData.length > 0 && (
         <div className="card-container">
           {packingData.map((data, index) => (

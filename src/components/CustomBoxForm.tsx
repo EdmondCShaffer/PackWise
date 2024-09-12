@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { BoxType, RATETABLE } from '../types/boxTypes';
+import { BoxType } from '../types/boxTypes';
 import './CustomBoxForm.css';
 
 interface CustomBoxFormProps {
   onAddBox: (box: BoxType) => void;
   existingBoxNames: string[];
+  selectedCarrier: string;
 }
 
 const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
@@ -18,7 +19,6 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
     weightMax: 0,
     dimensions: { x: 0, y: 0, z: 0 },
     itemsPerBoxMax: 0,
-    rateTable: RATETABLE,
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -44,10 +44,28 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (existingBoxNames.includes(box.name.trim())) {
       setError('Box name already exists. Please choose a different name.');
+    } else if (box.name.trim() === '') {
+      setError('Box name is required.');
+    } else if (
+      box.price <= 0 ||
+      box.weightMax <= 0 ||
+      box.itemsPerBoxMax <= 0
+    ) {
+      setError(
+        'Price, max weight, and max items per box must be greater than zero.'
+      );
+    } else if (
+      box.dimensions.x <= 0 ||
+      box.dimensions.y <= 0 ||
+      box.dimensions.z <= 0
+    ) {
+      setError('All dimensions must be greater than zero.');
     } else {
       setError(null);
+      // should use uuid or generate random number
       onAddBox({ ...box, refId: Date.now() });
       setBox({
         name: '',
@@ -56,7 +74,6 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
         weightMax: 0,
         dimensions: { x: 0, y: 0, z: 0 },
         itemsPerBoxMax: 0,
-        rateTable: RATETABLE,
       });
     }
   };
@@ -81,7 +98,7 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
 
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="price">Price (in cents)</label>
+          <label htmlFor="price">Price (in usd)</label>
           <input
             type="number"
             id="price"

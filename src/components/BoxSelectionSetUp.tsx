@@ -1,59 +1,54 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import './BoxSelectionSetUp.css';
 
-interface provider {
+interface Carrier {
   id: string;
   label: string;
 }
 
 interface BoxSelectionSetUpProps {
-  boxProvider: string[];
+  selectedCarriers: string[];
   comparisonMode: boolean;
   packagingGoal: string;
-  onBoxProviderChange: (carriers: string[]) => void;
+  onCarrierChange: (carriers: string[]) => void;
   onComparisonModeChange: (enabled: boolean) => void;
-  onCustomProviderSelected: () => void;
   onPackingStyleChange: (goal: string) => void;
+  onSelectBoxes: () => void;
 }
 
-const carriers: provider[] = [
-  { id: 'fedex', label: 'FedEx Boxes' },
-  { id: 'usps', label: 'USPS Boxes' },
-  { id: 'custom', label: 'Custom Boxes' },
+const carriers: Carrier[] = [
+  { id: 'ups', label: 'UPS' },
+  { id: 'fedex', label: 'FedEx' },
+  { id: 'usps', label: 'USPS' },
 ];
 
 const BoxSelectionSetUp: React.FC<BoxSelectionSetUpProps> = ({
-  boxProvider,
+  selectedCarriers,
   comparisonMode,
   packagingGoal,
-  onBoxProviderChange,
+  onCarrierChange,
   onComparisonModeChange,
-  onCustomProviderSelected,
   onPackingStyleChange,
+  onSelectBoxes,
 }) => {
-  const handleComparisonModeChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleComparisonModeChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value === 'yes';
     onComparisonModeChange(value);
-    if (!value) {
-      onBoxProviderChange([boxProvider[0] || '']);
-    }
   };
 
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCarrierChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     if (comparisonMode) {
-      if (boxProvider.includes(value)) {
-        onBoxProviderChange(
-          boxProvider.filter((provider) => provider !== value)
-        );
+      if (selectedCarriers.includes(value)) {
+        onCarrierChange(selectedCarriers.filter((item) => item !== value));
       } else {
-        onBoxProviderChange([...boxProvider, value]);
+        onCarrierChange([...selectedCarriers, value]);
       }
     } else {
-      onBoxProviderChange([value]);
-    }
-    if (value === 'custom') {
-      onCustomProviderSelected();
+      onCarrierChange([value]);
     }
   };
 
@@ -62,19 +57,20 @@ const BoxSelectionSetUp: React.FC<BoxSelectionSetUpProps> = ({
       <h1 className="title">Select Your Packaging Preferences</h1>
       <div className="selection-group-container">
         <div className="checkbox-group">
-          <h3 className="sub-title">Select Carriers for Packaging</h3>
-          {carriers.map((provider) => (
-            <div key={provider.id} className="checkbox-container">
+          <h3 className="sub-title">Select Carriers</h3>
+          {carriers.map((carrierOption) => (
+            <div key={carrierOption.id} className="checkbox-container">
               <input
                 type="checkbox"
-                id={provider.id}
-                value={provider.id}
-                checked={boxProvider.includes(provider.id)}
-                onChange={handleCheckboxChange}
+                id={carrierOption.id}
+                value={carrierOption.id}
+                checked={selectedCarriers.includes(carrierOption.id)}
+                onChange={handleCarrierChange}
                 className="checkbox"
+                disabled={!comparisonMode && selectedCarriers.length >= 1}
               />
-              <label htmlFor={provider.id} className="label">
-                {provider.label}
+              <label htmlFor={carrierOption.id} className="label">
+                {carrierOption.label}
               </label>
             </div>
           ))}
@@ -130,6 +126,11 @@ const BoxSelectionSetUp: React.FC<BoxSelectionSetUpProps> = ({
             Minimum Boxes
           </label>
         </div>
+      </div>
+      <div className="select-boxes-container">
+        <button className="select-boxes-button" onClick={onSelectBoxes}>
+          Select boxes
+        </button>
       </div>
     </div>
   );

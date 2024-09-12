@@ -19,7 +19,6 @@ import './App.css';
 const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [packingData, setPackingData] = useState<any[]>([]);
-  const [boxProvider, setBoxProvider] = useState<string[]>([]);
   const [selectedCarriers, setSelectedCarrier] = useState<string[]>([]);
   const [comparisonMode, setComparisonMode] = useState<boolean>(false);
   const [selectedBoxTypes, setSelectedBoxTypes] = useState<BoxType[]>([]);
@@ -133,7 +132,6 @@ const App: React.FC = () => {
     );
   }, [
     items,
-    boxProvider,
     selectedBoxTypes,
     comparisonMode,
     packagingGoal,

@@ -5,7 +5,6 @@ import './CustomBoxForm.css';
 interface CustomBoxFormProps {
   onAddBox: (box: BoxType) => void;
   existingBoxNames: string[];
-  selectedCarrier: string;
 }
 
 const CustomBoxForm: React.FC<CustomBoxFormProps> = ({

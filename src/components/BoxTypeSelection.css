@@ -1,7 +1,6 @@
 .box-type-selection-container {
   padding: 20px;
   width: 100%;
-
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -16,6 +15,14 @@
   display: flex;
   align-items: start;
   justify-content: flex-start;
+}
+.checkbox-group-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: scroll;
+  max-height: 325px;
 }
 
 .checkbox {
@@ -39,7 +46,11 @@
 }
 
 .confirm-button:hover {
-  background-color: #0056b3;
+  background-color: #3a557e;
+}
+.confirm-button:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
 }
 
 .box-type-selection-title {

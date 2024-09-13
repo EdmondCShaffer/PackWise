@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
+import { Item } from '../types/item';
 import './ItemForm.css';
-
-interface Item {
-  product: string;
-  height: number;
-  width: number;
-  length: number;
-  weight: number;
-  quantity: number;
-}
 
 interface ItemFormProps {
   item: Item;

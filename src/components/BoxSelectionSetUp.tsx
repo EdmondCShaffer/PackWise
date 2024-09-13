@@ -67,7 +67,6 @@ const BoxSelectionSetUp: React.FC<BoxSelectionSetUpProps> = ({
                 checked={selectedCarriers.includes(carrierOption.id)}
                 onChange={handleCarrierChange}
                 className="checkbox"
-                disabled={!comparisonMode && selectedCarriers.length >= 1}
               />
               <label htmlFor={carrierOption.id} className="label">
                 {carrierOption.label}

@@ -41,18 +41,19 @@
 }
 
 .submit-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
   background-color: #45689c;
   color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #45689c;
+  background-color: #3a557e;
 }
 
 .error-text {

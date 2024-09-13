@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import './Card.css'; // Import the CSS file
-
-interface Item {
-  name?: string;
-  refId?: string;
-  quantity?: number;
-  message?: string;
-}
+import { Item } from '../types/item';
+import './Card.css';
 
 interface Box {
   name: string;
@@ -69,7 +63,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
   const groupItems = (items: Item[]) => {
     return items.reduce<{ [key: string]: number }>((acc, itemData) => {
-      const itemName = itemData.name || `Item ${itemData.refId}`;
+      const itemName = itemData.item.name || `Item ${itemData.refId}`;
       if (!acc[itemName]) {
         acc[itemName] = 0;
       }
@@ -77,7 +71,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
       return acc;
     }, {});
   };
-
   const shippingGoal =
     data.boxTypeChoiceGoalUsed === 'lowest-cost' ? 'Low Cost' : 'Minimum Boxes';
 
@@ -168,6 +161,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           <div className="accordion-container">
             {data.boxes.map((box, index) => {
               const groupedItems = groupItems(box.box.items);
+              const isActive = activeIndex === index;
               return (
                 <div key={index} className="item">
                   <button
@@ -175,9 +169,12 @@ const Card: React.FC<CardProps> = ({ data }) => {
                     onClick={() => handleToggle(index)}
                     className="title-button"
                   >
-                    <h3>Box: {index + 1}</h3>
+                    <h3>
+                      Box: {index + 1}{' '}
+                      <span className="indicator">{isActive ? '▲' : '▼'}</span>
+                    </h3>
                   </button>
-                  {activeIndex === index && (
+                  {isActive && (
                     <div className="content">
                       <p>
                         <strong>Name:</strong> {box.box.name}

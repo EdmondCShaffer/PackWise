@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { predefinedBoxTypes, BoxType } from '../types/boxTypes';
+import { BoxType } from '../types/boxTypes';
+import { predefinedBoxTypes } from '../constants/predefinedBoxTypes';
 import CustomBoxForm from './CustomBoxForm';
 import './BoxTypeSelection.css';
 
@@ -54,7 +55,6 @@ const BoxTypeSelection: React.FC<BoxTypeSelectionProps> = ({
     setCustomBoxes((prevBoxes) => [...prevBoxes, newBox]);
   };
 
-  // Collect all box names for validation
   const allBoxNames = [
     ...predefinedBoxTypes.map((box) => box.name),
     ...customBoxes.map((box) => box.name),
@@ -63,7 +63,7 @@ const BoxTypeSelection: React.FC<BoxTypeSelectionProps> = ({
   return (
     <div className="box-type-selection-container">
       <h2 className="box-type-selection-title">Select Box Types</h2>
-      <div className="checkbox-group">
+      <div className="checkbox-group-boxes">
         {predefinedBoxTypes.map((box) => (
           <div key={box.refId} className="checkbox-container">
             <input
@@ -101,7 +101,11 @@ const BoxTypeSelection: React.FC<BoxTypeSelectionProps> = ({
         onAddBox={handleAddCustomBox}
         existingBoxNames={allBoxNames}
       />
-      <button onClick={handleConfirm} className="confirm-button">
+      <button
+        onClick={handleConfirm}
+        className="confirm-button"
+        disabled={selected.length === 0}
+      >
         Confirm
       </button>
     </div>

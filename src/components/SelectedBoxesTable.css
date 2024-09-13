@@ -26,17 +26,18 @@
   border-bottom: 1px solid #ddd;
 }
 
-.button {
+.selected-boxes-button {
+  margin-top: 20px;
   padding: 10px 20px;
-  font-size: 16px;
-  background-color: #45689c;
-  color: #fff;
   border: none;
   border-radius: 4px;
+  background-color: #45689c;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.selected-boxes-button:hover {
+  background-color: #3a557e;
 }

@@ -1,16 +1,8 @@
 import React from 'react';
+import { Item } from '../types/item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import './ItemTable.css';
-
-interface Item {
-  product: string;
-  height: number;
-  width: number;
-  length: number;
-  weight: number;
-  quantity: number;
-}
 
 interface ItemTableProps {
   items: Item[];

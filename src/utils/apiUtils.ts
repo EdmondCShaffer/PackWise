@@ -1,5 +1,6 @@
 import { BoxType } from "../types/boxTypes";
 import { Item } from "../types/item";
+import { UPSRATETABLE, USPSRATETABLE, FEDEXRATETABLE } from "../constants/rateTables";
 
 export const createRequestBody = (
   items: Item[],
@@ -36,4 +37,17 @@ export const createRequestBody = (
     boxTypes,
     includeScripts: false,
   };
+};
+
+export const getRateTable = (carrier: string) => {
+  switch (carrier) {
+    case 'fedex':
+      return FEDEXRATETABLE;
+    case 'usps':
+      return USPSRATETABLE;
+    case 'ups':
+      return UPSRATETABLE;
+    default:
+      return FEDEXRATETABLE;
+  }
 };

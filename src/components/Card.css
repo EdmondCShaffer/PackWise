@@ -52,6 +52,9 @@
 }
 
 .title-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #f8f8f8;
   border: none;
   width: 100%;
@@ -60,6 +63,10 @@
   font-size: 16px;
   cursor: pointer;
   outline: none;
+}
+
+.indicator {
+  margin-right: auto;
 }
 
 .content {

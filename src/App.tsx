@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { sendPackingRequest } from './api';
-import { createRequestBody } from './utils/apiUtils';
+import { createRequestBody, getRateTable } from './utils/apiUtils';
 
 import HeroSection from './components/HeroSection';
 import Logo from './assets/packwise-high-resolution-logo-transparent.png';
@@ -13,13 +13,12 @@ import SelectedBoxesTable from './components/SelectedBoxesTable';
 import Spinner from './components/Spinner';
 import { BoxType } from './types/boxTypes';
 import { Item } from './types/item';
-import { UPSRATETABLE, FEDEXRATETABLE, USPSRATETABLE } from './types/boxTypes';
 import './App.css';
 
 const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [packingData, setPackingData] = useState<any[]>([]);
-  const [selectedCarriers, setSelectedCarrier] = useState<string[]>([]);
+  const [selectedCarriers, setSelectedCarrier] = useState<string[]>(['ups']);
   const [comparisonMode, setComparisonMode] = useState<boolean>(false);
   const [selectedBoxTypes, setSelectedBoxTypes] = useState<BoxType[]>([]);
   const [showBoxTypeModal, setShowBoxTypeModal] = useState<boolean>(false);
@@ -51,7 +50,6 @@ const App: React.FC = () => {
 
   const handleSelectBoxes = () => {
     setShowBoxTypeModal(true);
-    console.log('clicked');
   };
 
   const handleBoxTypeSelect = (boxTypes: BoxType[]) =>
@@ -72,19 +70,6 @@ const App: React.FC = () => {
 
     setLoading(true);
 
-    const getRateTable = (carrier: string) => {
-      switch (carrier) {
-        case 'fedex':
-          return FEDEXRATETABLE;
-        case 'usps':
-          return USPSRATETABLE;
-        case 'ups':
-          return UPSRATETABLE;
-        default:
-          return FEDEXRATETABLE;
-      }
-    };
-
     try {
       const requests = selectedCarriers.map((carrier) => {
         const rateTable = getRateTable(carrier);
@@ -103,7 +88,6 @@ const App: React.FC = () => {
       });
 
       const responses = await Promise.all(requests);
-
       setPackingData(responses);
 
       setPreviousPackingInfo({

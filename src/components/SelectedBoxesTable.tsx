@@ -45,7 +45,7 @@ const SelectedBoxesTable: React.FC<SelectedBoxesTableProps> = ({
           ))}
         </tbody>
       </table>
-      <button onClick={onEdit} className="button">
+      <button onClick={onEdit} className="selected-boxes-button">
         Change box selections
       </button>
     </div>

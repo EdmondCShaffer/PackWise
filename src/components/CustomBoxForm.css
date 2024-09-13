@@ -8,6 +8,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
+  margin-top: 10px;
+}
 }
 .custom-box-title {
   color: #9c7945;
@@ -49,19 +51,19 @@ input:focus {
 }
 
 .add-box-button {
-  background-color: #45689c;
-  color: white;
+  margin-top: 20px;
+  padding: 10px 20px;
   border: none;
-  padding: 8px 12px;
   border-radius: 4px;
-  font-size: 14px;
+  background-color: #45689c;
+  color: #fff;
   cursor: pointer;
-  margin-top: 8px;
-  width: 20%;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .add-box-button:hover {
-  background-color: #0056b3;
+  background-color: #3a557e;
 }
 
 .error-message {

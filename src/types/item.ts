@@ -1,11 +1,12 @@
-// types/item.ts
-
 export interface Item {
-    product: string;
-    weight: number;
-    length: number;
-    width: number;
-    height: number;
-    quantity: number;
-  }
-  
+  item: any;
+  refId: string;
+  product: string;
+  weight: number;
+  length: number;
+  width: number;
+  height: number;
+  quantity: number;
+  message?: string;
+  name?: string;
+}

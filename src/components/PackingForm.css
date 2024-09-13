@@ -14,18 +14,19 @@
 }
 
 .pack-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
   background-color: #45689c;
   color: #fff;
-  border: none;
-  padding: 15px 15px;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
   width: 100%;
-  font-weight: bold;
 }
 
 .pack-button:hover {
-  background-color: #30486d;
+  background-color: #3a557e;
 }
 
 .pack-button:disabled {

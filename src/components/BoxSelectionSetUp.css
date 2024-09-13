@@ -99,12 +99,12 @@
 
 .select-boxes-button {
   margin-top: 20px;
-  padding: 15px 20px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   background-color: #45689c;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 30%;
+  width: 100%;
 }

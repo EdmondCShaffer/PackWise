@@ -16,9 +16,9 @@ const HeroSection: React.FC<Props> = ({
     <div className="container">
       <img src={logoSrc} alt="Company Logo" className="logo" />
       <p className="mission-statement">{missionStatement}</p>
-      <button className="getting-started" onClick={onGetStarted}>
+      {/* <button className="getting-started" onClick={onGetStarted}>
         Get Started
-      </button>
+      </button> */}
     </div>
   );
 };

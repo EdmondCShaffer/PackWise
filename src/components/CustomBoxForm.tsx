@@ -11,9 +11,14 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
   onAddBox,
   existingBoxNames,
 }) => {
+  // TODO: use uuid to avoid potential conflicts
+  const generateRandomId = (): number => {
+    return Date.now() + Math.floor(Math.random() * 10000);
+  };
+
   const [box, setBox] = useState<BoxType>({
     name: '',
-    refId: Date.now(),
+    refId: generateRandomId(),
     price: 0,
     weightMax: 0,
     dimensions: { x: 0, y: 0, z: 0 },
@@ -64,11 +69,10 @@ const CustomBoxForm: React.FC<CustomBoxFormProps> = ({
       setError('All dimensions must be greater than zero.');
     } else {
       setError(null);
-      // should use uuid or generate random number
-      onAddBox({ ...box, refId: Date.now() });
+      onAddBox({ ...box, refId: generateRandomId() });
       setBox({
         name: '',
-        refId: Date.now(),
+        refId: generateRandomId(),
         price: 0,
         weightMax: 0,
         dimensions: { x: 0, y: 0, z: 0 },

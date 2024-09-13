@@ -4,21 +4,13 @@ import './HeroSection.css';
 interface Props {
   logoSrc: string;
   missionStatement: string;
-  onGetStarted: () => void;
 }
 
-const HeroSection: React.FC<Props> = ({
-  logoSrc,
-  missionStatement,
-  onGetStarted,
-}) => {
+const HeroSection: React.FC<Props> = ({ logoSrc, missionStatement }) => {
   return (
     <div className="container">
       <img src={logoSrc} alt="Company Logo" className="logo" />
       <p className="mission-statement">{missionStatement}</p>
-      {/* <button className="getting-started" onClick={onGetStarted}>
-        Get Started
-      </button> */}
     </div>
   );
 };

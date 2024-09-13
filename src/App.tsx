@@ -130,7 +130,6 @@ const App: React.FC = () => {
       <HeroSection
         logoSrc={Logo}
         missionStatement="Our mission is to revolutionize the packing process by providing businesses and individuals with an intuitive, efficient, and cost-effective solution. We aim to simplify packing decisions, optimize box utilization, and reduce costs while delivering a seamless user experience."
-        onGetStarted={handleSelectBoxes}
       />
       <div className="packing-form-section">
         <BoxSelectionSetUp

@@ -1,6 +1,6 @@
 export interface Item {
-  item: any;
-  refId: string;
+  item?: any;
+  refId?: string;
   product: string;
   weight: number;
   length: number;
